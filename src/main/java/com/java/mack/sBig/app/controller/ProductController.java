@@ -16,8 +16,6 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
-    @Autowired
-    private RecipeService recipeService;
 
     @PostMapping
     public ResponseEntity<String> createProduct(@RequestBody Product product) {
@@ -25,18 +23,21 @@ public class ProductController {
         return ResponseEntity.ok(message);
     }
 
-    /**
-     * Obtiene todos los productos.
-     */
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productService.findAll();
         return ResponseEntity.ok(products);
     }
 
-    @PostMapping("{productid}/recipe")
-    public String crearReceta(@RequestBody Recipe recipe, @PathVariable Long productid) {
-        return recipeService.create(recipe, productid);
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        productService.updateProduct(id, product);
+        return ResponseEntity.ok("Producto actualizado correctamente!");
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProductById(@PathVariable Long id) {
+        productService.deleteById(id);
+        return ResponseEntity.ok("Producto eliminado correctamente!");
     }
 }

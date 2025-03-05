@@ -1,5 +1,6 @@
 package com.java.mack.sBig.app.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.java.mack.sBig.app.model.dto.ProductType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,5 +28,6 @@ public class Product {
     private Long userId;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Recipe> recipes = new ArrayList<>();
 }

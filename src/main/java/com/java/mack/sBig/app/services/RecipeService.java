@@ -16,8 +16,8 @@ public class RecipeService {
     @Autowired
     private  ProductService productService;
 
-    public String create(Recipe recipe, Long id) {
-        Product p = productService.findById(id);
+    public String create(Recipe recipe, Long product_id) {
+        Product p = productService.findById(product_id);
         recipe.setProduct(p);
         recipeRepository.save(recipe);
         return "receta guardada correctamente";
